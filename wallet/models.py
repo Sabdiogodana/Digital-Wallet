@@ -4,6 +4,7 @@ from email import message
 from locale import currency
 from django.db import models
 
+
 # Create your models here.
 class Customer(models.Model):
     first_name = models.CharField(null=True,max_length=100)
@@ -12,6 +13,15 @@ class Customer(models.Model):
     email = models.EmailField(null=True,max_length=150)
     phonenumber =models.CharField (max_length=16)
     age = models.IntegerField(null=True)
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES,null=True)
+    nationality=models.CharField(max_length=20,null=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/',null=True)
+
+
 
 class Wallet(models.Model):
     customer = models.ForeignKey(default=1,on_delete=models.CASCADE, to = Customer)
@@ -20,6 +30,7 @@ class Wallet(models.Model):
     date_created = models.DateTimeField(default=datetime.now)
     isActive = models.BooleanField()
     balance = models.BigIntegerField()
+   
 
 
 class Account(models.Model):
@@ -37,7 +48,6 @@ class Transaction(models.Model):
     transaction_number = models.IntegerField()
     wallet = models.ForeignKey(default=1,on_delete=models.CASCADE, to=Wallet)
     amount = models.BigIntegerField()
-    # receipt = models.OneToOneField(on_delete=models.CASCADE,to=Receipt)
 
 
 class Card(models.Model):
@@ -54,13 +64,14 @@ class ThirdParty(models.Model):
     transaction_cost = models.IntegerField()
     currency = models.CharField(max_length=100)
     account = models.ForeignKey(default=1,on_delete=models.CASCADE, to=Account)
+    thirdparty_id=models.CharField(max_length=10,null=True)
+    phone_Number=models.IntegerField()
 
 
 class Notification(models.Model):
     message = models.CharField(max_length=100)
     title = models.CharField(max_length=100)
-    # recipient = models.ForeignKey()
-
+   
 
 class Receipt(models.Model):
     amount = models.IntegerField()
@@ -72,7 +83,6 @@ class Loan(models.Model):
     Wallet = models.ForeignKey(default=1,on_delete=models.CASCADE, to=Wallet)
     interest_rate = models.IntegerField()
     Loan_balance = models.IntegerField()
-    # guarantor = models.ForeignKey()
     LoanTerm = models.IntegerField()
     payment_due_date = models.DateTimeField(default=datetime.now)
     purpose = models.CharField(max_length=100)
@@ -81,7 +91,13 @@ class Loan(models.Model):
 class Reward(models.Model):
     name = models.CharField(max_length=100)
     points = models.IntegerField()
-    customer_id = models.IntegerField()    
+    customer_id = models.IntegerField()   
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES,null=True)  
+    bonus=models.CharField(max_length=25, null=True) 
 
 
 
