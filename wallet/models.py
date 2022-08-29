@@ -46,8 +46,10 @@ class Transaction(models.Model):
     transaction_type = models.CharField(max_length=100)
     transaction_charge = models.IntegerField()
     transaction_number = models.IntegerField()
-    wallet = models.ForeignKey(default=1,on_delete=models.CASCADE, to=Wallet)
-    amount = models.BigIntegerField()
+    transaction_amount = models.BigIntegerField()
+    message = models.CharField(max_length=100)
+    origin_account =models.ForeignKey("Wallet", on_delete=models.CASCADE,related_name='origin_transaction',null=True)
+    destination_account = models.ForeignKey("Wallet", on_delete=models.CASCADE,related_name='destination_transaction',null=True)
 
 
 class Card(models.Model):
@@ -76,14 +78,13 @@ class Notification(models.Model):
 class Receipt(models.Model):
     amount = models.IntegerField()
     dateTime = models.DateTimeField(default=datetime.now)
-    transaction  = models.PositiveIntegerField()
-    receipt_type = models.CharField(max_length=100)
+    receipt_message = models.CharField(max_length=100)
 
 class Loan(models.Model):
     Wallet = models.ForeignKey(default=1,on_delete=models.CASCADE, to=Wallet)
     interest_rate = models.IntegerField()
-    Loan_balance = models.IntegerField()
-    LoanTerm = models.IntegerField()
+    loan_balance = models.IntegerField()
+    loanTerm = models.IntegerField()
     payment_due_date = models.DateTimeField(default=datetime.now)
     purpose = models.CharField(max_length=100)
     amount = models.IntegerField()
