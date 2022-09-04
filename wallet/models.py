@@ -9,7 +9,7 @@ from django.db import models
 class Customer(models.Model):
     first_name = models.CharField(null=True,max_length=100)
     last_name = models.CharField(null=True,max_length=100)
-    address = models.TextField(null=True,max_length=100)
+    address = models.TextField(null=True,max_length=50)
     email = models.EmailField(null=True,max_length=150)
     phonenumber =models.CharField (max_length=16)
     age = models.IntegerField(null=True)
