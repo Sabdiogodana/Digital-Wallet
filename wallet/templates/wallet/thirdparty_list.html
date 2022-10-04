@@ -9,16 +9,34 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="card" style="width: 55rem;height: 20rem;background-color: bisque;" >
+    <h2>ThirdParty</h2>
+    <style>
+        table{
+    width: 100%;
+    background-color: 	#702963;
+    text-align: center;
+    color:#ffff;
+   
+    font-family:sans-serif;
+}
+table,th,td {
+    border-collapse: collapse;
+    padding: 5px;
+    border: 1px solid #fff;
+}
+    </style>
+    <!-- <div class="card" style="width: 55rem;height: 20rem;background-color: bisque;" > -->
         <table>
             <td>
             <th>
-                <td>Name</td>
-                <td>Cost</td>
-                <td>Currency</td>
-                <td>Account</td>
-                <td>Id</td>
-                <td>Phonenumber</td>
+            <tr>
+                <th>Name</th>
+                <th>Cost</th>
+                <th>Currency</th>
+                <th>Account</th>
+                <th>Id</th>
+                <th>Phonenumber</th>
+            </tr>
             </th>
         </td>
             <tr> {% for thirdparty in thirdparties %}

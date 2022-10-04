@@ -9,21 +9,36 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="card" style="width: 55rem;height: 20rem;background-color: bisque;">
+    <h2>Transaction</h2>
+    <style>
+        table{
+    width: 100%;
+    background-color: 	#702963;
+    text-align: center;
+    color:#ffff;
+   
+    font-family:sans-serif;
+}
+table,th,td {
+    border-collapse: collapse;
+    padding: 5px;
+    border: 1px solid #fff;
+}
+    </style>
+    <!-- <div class="card" style="width: 55rem;height: 20rem;background-color: bisque;"> -->
         <table>
             <td>
             <th>
-                <td>Code</td>
-                <td>Type</td>
-                <td>Charge</td>
-                <td>Number</td>
-                <td>Amount</td>
-                <!-- <td>Message</td> -->
-                <td>Origin</td>
-                <td>Destination</td>
-
-
-            </th>
+            <tr>
+                <th>Code</th>
+                <th>Type</th>
+                <th>Charge</th>
+                <th>Number</th>
+                <th>Amount</th>
+                <th>Origin</th>
+                <th>Destination</th>
+        </tr>
+        </th>
         </td>
                  {% for transaction in transactions %}
             <tr> 

@@ -9,23 +9,48 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="card" style="width: 55rem; height: 20rem; background-color: bisque;">
+    <h2>Customer</h2>
+    <!-- <div class="card" style="width: 55rem; height: 14rem; background-color: bisque;"> -->
+<style>
+    /* table,
+    th {
+    border: 1px solid #333;
+    border-collapse: collapse;
+} */
+table{
+    width: 100%;
+    background-color: 	#702963;
+    text-align: center;
+    color:#ffff;
+   
+    font-family:sans-serif;
+}
+table,th,td {
+    border-collapse: collapse;
+    padding: 5px;
+    border: 1px solid #fff;
+}
+</style>
 
     <table>
         <td>
         <th>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Address</td>
-            <td>Age</td>
-            <td>Email</td>
-            <td> Phone Number</td>
-            <td>Gender</td>
-            <td>Nationality</td>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th> Phone Number</th>
+            <th>Gender</th>
+            <th>Nationality</th>
+            <th>profile</th>
+
            
-            
+        </tr>
         </th>
     </td>
+    <th>
         <tr> {% for customer in customers %}
         
             <td>{{ customer.first_name}}</td>
@@ -36,7 +61,11 @@
             <td>{{ customer.phonenumber}}</td>
             <td>{{ customer.gender}}</td>
             <td>{{ customer.nationality}}</td>
+            <td><a href=" {% url 'customer_profile' id=customer.id %}">
+                view profile </a>
+            
         </tr>
+    </th>
         {% endfor %}
     
 
