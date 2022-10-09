@@ -41,7 +41,7 @@ urlpatterns =[
     path("cards/<int:id>/",card_profile,name="card_profile"),
     path("cards/edit/<int:id>/",edit_profile,name="edit_card"),
 
-    path("receipts/<int:id>/",receipt_profile,name="receipt_profile"),
+    # path("receipts/<int:id>/",receipt_profile,name="receipt_profile"),
     path("receipts/edit/<int:id>/",edit_receipt,name="edit_receipt"),
     
     path("transactions/<int:id>/",transaction_profile,name="transaction_profile"),
