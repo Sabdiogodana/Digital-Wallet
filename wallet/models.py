@@ -40,6 +40,99 @@ class Account(models.Model):
     balance = models.PositiveIntegerField()
     account_type = models.CharField(max_length=100)
 
+    def deposit(self, amount):
+       if amount <= 0:
+           message =  "Invalid amount"
+           status = 403
+       else:
+           self.account_balance += amount
+           self.save()
+           message = f"You have deposited {amount}, your new balance is {self.account_balance}"
+           status = 200
+       return message, status
+
+    
+    def transfer(self, destination, amount):
+       if amount <= 0:
+           message =  "Invalid amount"
+           status = 403
+      
+       elif amount > self.account_balance:
+           message =  "Insufficient balance"
+           status = 403
+      
+       else:
+           self.account_balance -= amount
+           self.save()
+           destination.deposit(amount)
+          
+           message = f"You have transfered {amount}, your new balance is {self.account_balance}"
+           status = 200
+       return message, status
+
+
+    def withdraw(self,amount):
+        date = datetime.now()
+        if amount <= 0:
+            message = f"Enter the correct amount"
+            status = 403
+            return  message, status
+        elif amount > self.account_balance:
+            message=  f"your account balance is low "
+            status = 403
+            return message, status
+        else: 
+           self.account_balance -= amount
+           message = f"Hello {self.account_name} you have withdrawn {amount} at {date.strftime('%d%Y/%m/ %H:%M')} and your balance is {self.account_balance}"
+           status = 200
+           return message, status
+        
+
+    def borrow(self,amount):
+        self.loan_balance = 0
+        if amount <= 100:
+            message = f"Enter amount more than 100"
+            status = 403
+            return message , status
+        elif self.loan_balance > 0:
+            message = f"You have an outstanding amount of {self.loan_balance}"
+            status = 403
+            return message , status
+        else:
+            self.loan_balance += amount
+            self.account_balance += amount
+            message = f"Your loan balance is {self.loan_balance}"
+            status = 200
+            return message , status
+    
+
+    def loan_repayment(self, amount):
+
+        if amount < self.loan_balance:
+            self.loan_balance -= amount
+            message =  f"You have paid {amount} and your have an outstanding balance of {self.loan_balance}"
+            status = 403
+            return message , status
+
+        elif amount == self.loan_balance:
+            self.loan_balance-= amount
+            message = f"You have paid {amount} and your have an outstanding balance of {self.loan_balance}"
+            status = 403
+            return message, status
+        elif self.loan_balance == 0:
+            message = f"You have no loan balance, you can borrow"
+            status = 403
+            return message, status
+
+        else:   
+            overpay = amount - self.loan_balance
+            self.account_balance+=overpay
+            self.loan_balance = 0
+            message = f"You loan has been fully settled."
+            status = 200
+            return message, status
+   
+
 
 class Transaction(models.Model):
     transaction_code = models.CharField(max_length=100)
